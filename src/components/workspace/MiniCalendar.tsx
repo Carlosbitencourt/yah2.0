@@ -84,32 +84,40 @@ export function MiniCalendar() {
         </div>
       </CardHeader>
 
-      <CardContent className="p-4 space-y-6">
+      <CardContent className="p-4">
         {isLoading ? (
           <div className="h-[280px] flex items-center justify-center">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : (
-          <div className="space-y-6">
-            <div className="relative p-1 rounded-2xl bg-white/[0.02] border border-white/5">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                locale={ptBR}
-                modifiers={modifiers}
-                modifiersClassNames={{
-                  hasActivity: "relative after:absolute after:bottom-[3px] after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full after:shadow-[0_0_5px_rgba(var(--primary),0.8)]"
-                }}
-                className="rounded-xl"
-                classNames={{
-                  day_selected: "bg-primary text-primary-foreground font-bold shadow-[0_0_20px_rgba(var(--primary),0.4)] rounded-xl",
-                  day_today: "bg-white/5 text-primary font-bold border border-primary/20 rounded-xl",
-                }}
-              />
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="lg:w-[55%] space-y-4">
+              <div className="relative p-1 rounded-2xl bg-white/[0.02] border border-white/5">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  locale={ptBR}
+                  modifiers={modifiers}
+                  modifiersClassNames={{
+                    hasActivity: "relative after:absolute after:bottom-[3px] after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full after:shadow-[0_0_5px_rgba(var(--primary),0.8)]"
+                  }}
+                  className="rounded-xl w-full"
+                  classNames={{
+                    day_selected: "bg-primary text-primary-foreground font-bold shadow-[0_0_20px_rgba(var(--primary),0.4)] rounded-xl",
+                    day_today: "bg-white/5 text-primary font-bold border border-primary/20 rounded-xl",
+                    table: "w-full border-collapse space-y-1",
+                    head_row: "flex w-full mt-2",
+                    head_cell: "text-muted-foreground rounded-md w-full font-normal text-[0.8rem]",
+                    row: "flex w-full mt-2",
+                    cell: "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 w-full",
+                    day: "h-9 w-full p-0 font-normal aria-selected:opacity-100",
+                  }}
+                />
+              </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="lg:w-[45%] flex flex-col space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="text-[11px] font-black uppercase tracking-widest text-muted-foreground/80 flex items-center gap-2">
                   <div className="w-1 h-3 bg-primary rounded-full" />
@@ -120,7 +128,7 @@ export function MiniCalendar() {
                 </div>
               </div>
 
-              <div className="space-y-2.5 max-h-[160px] overflow-y-auto pr-1 custom-scrollbar">
+              <div className="space-y-2.5 max-h-[300px] lg:max-h-[340px] overflow-y-auto pr-1 custom-scrollbar flex-1">
                 {selectedDayActivities.length > 0 ? (
                   selectedDayActivities.map((activity) => (
                     <div
@@ -162,7 +170,7 @@ export function MiniCalendar() {
                     </div>
                   ))
                 ) : (
-                  <div className="py-8 text-center flex flex-col items-center gap-2 rounded-2xl border border-dashed border-white/5 bg-white/[0.01]">
+                  <div className="py-8 text-center flex flex-col items-center justify-center h-full gap-2 rounded-2xl border border-dashed border-white/5 bg-white/[0.01]">
                     <div className="p-3 rounded-full bg-white/[0.02] text-muted-foreground/20">
                       <CalendarDays className="w-6 h-6" />
                     </div>
